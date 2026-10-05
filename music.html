@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101019">
+  <meta name="description" content="A home for the music, artists, albums, and songs worth coming back to.">
+  <title>music — Turn it up</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+    :root { color-scheme: dark; --ink:#101019; --panel:#1c1c28; --cream:#f9f0df; --muted:#aaa5a7; --gold:#ffc873; --rose:#f07483; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; min-width:320px; background:var(--ink); color:var(--cream); font-family:'DM Sans',Arial,sans-serif; }
+    a { color:inherit; }
+    .page { max-width:1440px; min-height:100vh; margin:auto; overflow:hidden; position:relative; }
+    .page::before { content:""; position:absolute; top:0; right:-180px; width:750px; height:750px; border-radius:50%; background:radial-gradient(circle,#a4486257 0,#863d5826 36%,transparent 69%); pointer-events:none; }
+    header { position:relative; z-index:2; display:flex; align-items:center; justify-content:space-between; padding:28px clamp(24px,6vw,86px); border-bottom:1px solid #ffffff19; }
+    .brand { display:inline-flex; align-items:center; gap:10px; text-decoration:none; font-family:'Barlow Condensed',Impact,sans-serif; font-size:32px; font-weight:900; letter-spacing:.01em; line-height:1; }
+    .brand-mark { width:31px; height:31px; border:6px solid var(--rose); border-radius:50%; position:relative; box-shadow:0 0 0 2px #11111a inset; }
+    .brand-mark::after { content:""; position:absolute; inset:6px; border-radius:50%; background:var(--gold); }
+    .header-note { text-transform:uppercase; letter-spacing:.25em; font-size:11px; font-weight:700; color:#b8adb0; }
+    main { position:relative; }
+    .hero { min-height:680px; display:grid; grid-template-columns:minmax(0,1fr) minmax(310px,.82fr); align-items:center; gap:30px; padding:60px clamp(24px,6vw,86px) 90px; }
+    .hero-copy { position:relative; z-index:1; }
+    .eyebrow { display:flex; align-items:center; gap:12px; margin:0 0 23px; font-size:12px; font-weight:700; letter-spacing:.23em; text-transform:uppercase; color:var(--gold); }
+    .eyebrow::before { content:""; width:27px; height:2px; background:var(--gold); }
+    h1 { margin:0; font-family:'Barlow Condensed',Impact,sans-serif; font-size:clamp(84px,12vw,178px); font-weight:900; line-height:.78; letter-spacing:-.045em; text-transform:uppercase; }
+    h1 span { display:block; }
+    h1 .accent { color:var(--rose); }
+    .hero-description { max-width:465px; margin:35px 0 32px; color:#c8c0c1; line-height:1.75; font-size:16px; }
+    .primary-link { display:inline-flex; align-items:center; gap:24px; min-height:57px; padding:0 20px; border:1px solid var(--gold); background:var(--gold); color:var(--ink); font-size:12px; font-weight:700; letter-spacing:.11em; text-transform:uppercase; text-decoration:none; transition:transform .2s,background .2s; }
+    .primary-link:hover,.primary-link:focus-visible { transform:translateY(-3px); background:#ffdb9f; }
+    .primary-link svg { width:18px; height:18px; }
+    .art { width:min(100%,540px); aspect-ratio:1; justify-self:center; position:relative; display:grid; place-items:center; filter:drop-shadow(0 25px 40px #0009); }
+    .art::before { content:""; position:absolute; width:94%; aspect-ratio:1; border:1px solid #e2bb9f39; transform:rotate(-12deg); }
+    .art::after { content:""; position:absolute; width:94%; aspect-ratio:1; border:1px solid #e2bb9f39; transform:rotate(12deg); }
+    .art svg { width:100%; height:100%; position:relative; z-index:1; transform:rotate(-12deg); animation:float 7s ease-in-out infinite; }
+    @keyframes float { 50% { transform:translateY(-12px) rotate(-8deg); } }
+    .side-word { position:absolute; right:-12px; bottom:7%; z-index:2; color:var(--gold); font-family:'Barlow Condensed',Impact,sans-serif; font-weight:800; font-size:clamp(22px,3vw,40px); letter-spacing:.13em; transform:rotate(-90deg) translateX(65%); transform-origin:right bottom; }
+    .ticker { display:flex; align-items:center; gap:29px; overflow:hidden; white-space:nowrap; padding:18px clamp(24px,6vw,86px); background:var(--rose); color:var(--ink); font-family:'Barlow Condensed',Impact,sans-serif; font-weight:800; font-size:22px; letter-spacing:.12em; text-transform:uppercase; }
+    .ticker b { font-family:Arial,sans-serif; font-size:20px; }
+    #artists-albums-songs { padding:82px clamp(24px,6vw,86px) 105px; scroll-margin-top:20px; }
+    .section-topline { margin:0 0 12px; color:var(--gold); font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.22em; }
+    h2 { margin:0 0 18px; font-family:'Barlow Condensed',Impact,sans-serif; font-size:clamp(52px,7vw,94px); font-weight:900; letter-spacing:-.025em; line-height:.95; text-transform:uppercase; }
+    .section-intro { margin:0 0 35px; color:#c8c0c1; max-width:600px; line-height:1.7; }
+    .cards { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+    .card { min-height:230px; padding:27px; border:1px solid #ffffff24; background:linear-gradient(145deg,#262431,#191923); display:flex; flex-direction:column; justify-content:space-between; }
+    .card-index { color:var(--gold); font-size:12px; font-weight:700; letter-spacing:.16em; }
+    .card h3 { margin:0 0 8px; font-family:'Barlow Condensed',Impact,sans-serif; font-size:43px; line-height:1; text-transform:uppercase; }
+    .card p { margin:0; color:#aaa4a8; font-size:13px; line-height:1.55; }
+    footer { display:flex; justify-content:space-between; gap:20px; padding:25px clamp(24px,6vw,86px); border-top:1px solid #ffffff1a; color:#aaa4a8; font-size:12px; }
+    footer strong { color:var(--cream); }
+    @media (max-width:850px) { .hero { min-height:0; grid-template-columns:1fr; padding-top:75px; gap:8px; } .art { width:min(75vw,420px); margin:0 auto; } .side-word { right:1%; } }
+    @media (max-width:600px) { header { padding-top:22px; padding-bottom:22px; } .header-note { font-size:9px; letter-spacing:.12em; } .hero { padding-top:68px; padding-bottom:38px; } h1 { font-size:clamp(79px,18vw,125px); } .hero-description { margin-top:29px; } .art { width:min(92vw,400px); } .cards { grid-template-columns:1fr; } .card { min-height:170px; } footer { flex-direction:column; } }
+    @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } .art svg { animation:none; } .primary-link { transition:none; } }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <a class="brand" href="#top" aria-label="music home"><span class="brand-mark" aria-hidden="true"></span>music<span style="color:var(--rose)">.</span></a>
+      <span class="header-note">A place for the good stuff</span>
+    </header>
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Welcome to the collection</p>
+          <h1 id="hero-title"><span>Turn</span><span>it <span class="accent">up.</span></span></h1>
+          <p class="hero-description">The songs that stick. The albums you play straight through. The artists who make you turn the volume up one more notch.</p>
+          <a class="primary-link" href="artist-album-song.html">Artist, Album, Song <svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M4 12h15m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+        <div class="art" role="img" aria-label="Original illustration of a vinyl record with a lightning bolt and starburst">
+          <svg viewBox="0 0 540 540" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <radialGradient id="disc"><stop offset="0" stop-color="#292432"/><stop offset=".55" stop-color="#13131d"/><stop offset="1" stop-color="#34303b"/></radialGradient>
+              <linearGradient id="label" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffdc98"/><stop offset="1" stop-color="#f07784"/></linearGradient>
+            </defs>
+            <path d="m268 5 11 44 24-35-1 44 36-25-15 41 43-11-29 33 44 5-38 22 40 20-44 7 30 32-43-10 17 40-37-24 3 44-26-34-10 44-12-43-24 35 1-44-36 25 15-41-43 11 29-33-44-5 38-22-40-20 44-7-30-32 43 10-17-40 37 24-3-44 26 34z" fill="#f07483" opacity=".92" transform="translate(155 112) scale(.42)"/>
+            <circle cx="270" cy="270" r="238" fill="url(#disc)" stroke="#f4b979" stroke-width="3"/>
+            <circle cx="270" cy="270" r="218" fill="none" stroke="#ffffff" stroke-opacity=".13" stroke-width="2"/>
+            <circle cx="270" cy="270" r="199" fill="none" stroke="#ffffff" stroke-opacity=".09" stroke-width="3"/>
+            <circle cx="270" cy="270" r="178" fill="none" stroke="#ffffff" stroke-opacity=".13" stroke-width="2"/>
+            <circle cx="270" cy="270" r="156" fill="none" stroke="#ffffff" stroke-opacity=".09" stroke-width="3"/>
+            <circle cx="270" cy="270" r="135" fill="none" stroke="#ffffff" stroke-opacity=".12" stroke-width="2"/>
+            <path d="M101 398a223 223 0 0 0 205 92" fill="none" stroke="#f8e9d8" stroke-opacity=".2" stroke-width="6" stroke-linecap="round"/>
+            <circle cx="270" cy="270" r="111" fill="url(#label)"/>
+            <circle cx="270" cy="270" r="97" fill="none" stroke="#101019" stroke-width="2" stroke-opacity=".5"/>
+            <path d="m281 173-68 101h48l-21 91 86-118h-50l28-74z" fill="#101019"/>
+            <circle cx="270" cy="270" r="7" fill="#f9f0df"/>
+            <path d="m79 85 9-25 9 25 25 9-25 9-9 25-9-25-25-9zm377 342 7-20 7 20 20 7-20 7-7 20-7-20-20-7z" fill="#ffc873"/>
+          </svg>
+          <span class="side-word" aria-hidden="true">PLAY IT LOUD</span>
+        </div>
+      </section>
+      <div class="ticker" aria-hidden="true"><span>Good music never gets old</span><b>✦</b><span>Play it again</span><b>✦</b><span>Good music never gets old</span></div>
+      <section id="artists-albums-songs" aria-labelledby="collection-title">
+        <p class="section-topline">01 / The collection</p>
+        <h2 id="collection-title">Artists. Albums. Songs.</h2>
+        <p class="section-intro">This is where the collection begins. Explore it by the people who made the music, the records they released, and the songs you keep coming back to.</p>
+        <div class="cards">
+          <article class="card"><span class="card-index">01 / PEOPLE</span><div><h3>Artists</h3><p>The voices, bands, and musicians behind it all.</p></div></article>
+          <article class="card"><span class="card-index">02 / RECORDS</span><div><h3>Albums</h3><p>Full records and favorite releases, all in one place.</p></div></article>
+          <article class="card"><span class="card-index">03 / TRACKS</span><div><h3>Songs</h3><p>The individual tracks that deserve another spin.</p></div></article>
+        </div>
+      </section>
+    </main>
+    <footer><strong>music.</strong><span>Made for the love of listening.</span></footer>
+  </div>
+</body>
+</html>
